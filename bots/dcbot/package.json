@@ -1,0 +1,17 @@
+{
+  "name": "lhq-verify-bot",
+  "version": "2.0.0",
+  "description": "Hệ thống xác thực hồ sơ thành viên — Liên Hiệp Quit",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "deploy": "node src/deploy-commands.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "firebase-admin": "^13.10.0"
+  }
+}

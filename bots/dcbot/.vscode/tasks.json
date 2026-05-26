@@ -1,0 +1,11 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Phân tích quy trình verify",
+			"type": "shell",
+			"command": "echo 'Phân tích code role assignment flow'",
+			"group": "other"
+		}
+	]
+}
