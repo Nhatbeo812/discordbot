@@ -75,9 +75,11 @@ export async function handleVerifyStart(interaction) {
   const step = tempForm?.step ?? 0;
 
   if (step >= 5) {
-    await resetUserForm(userId);
+    // [FIX Lỗi 1] showModal TRƯỚC (trong 3s token còn hiệu lực), reset DB SAU
     logger.info(`[Verify] Auto-reset step>=5 cho ${interaction.user.username}`);
-    return openForm1(interaction);
+    const showModalPromise = openForm1(interaction);
+    resetUserForm(userId).catch(e => logger.warn(`[Verify] Reset lỗi (non-critical): ${e.message}`));
+    return showModalPromise;
   }
 
   if (step === 1) {
@@ -177,21 +179,26 @@ export async function handleForm1Submit(interaction) {
 export async function handleOpenForm2(interaction) {
   if (isOnCooldown(interaction.user.id)) return interaction.reply({ content: '⏳ Đợi vài giây.', flags: MessageFlags.Ephemeral });
 
-  // [FIX C] defer trước DB call
-  await interaction.deferUpdate();
-
+  // [FIX Lỗi 2] KHÔNG deferUpdate trước showModal — Discord không cho phép showModal sau defer
+  // Đọc DB trước khi reply bất kỳ thứ gì; nếu cần báo lỗi thì reply ephemeral, nếu OK thì showModal
   const tempForm = await dbHelpers.getTempForm(interaction.user.id);
   const step = tempForm?.step ?? 0;
-  if (step === 0) return interaction.editReply({ content: '❌ Hoàn thành Phần 1 trước.', components: [], embeds: [] });
+
+  if (step === 0) {
+    return interaction.reply({ content: '❌ Hoàn thành Phần 1 trước.', flags: MessageFlags.Ephemeral });
+  }
 
   if (step >= 2) {
-    return interaction.editReply({
+    return interaction.reply({
       embeds: [progressEmbed(step).setDescription('⚠️ Đã hoàn thành Phần 2. Bấm để tiếp tục Phần 3.')],
       components: [new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId('verify_open_form3').setLabel('Tiếp tục Phần 3 →').setStyle(ButtonStyle.Primary)
       )],
+      flags: MessageFlags.Ephemeral,
     });
   }
+
+  // step === 1: OK, mở modal (đây là response duy nhất cho interaction này)
   return openForm2(interaction);
 }
 
@@ -241,19 +248,23 @@ export async function handleForm2Submit(interaction) {
 export async function handleOpenForm3(interaction) {
   if (isOnCooldown(interaction.user.id)) return interaction.reply({ content: '⏳ Đợi vài giây.', flags: MessageFlags.Ephemeral });
 
-  // [FIX C] defer trước DB call
-  await interaction.deferUpdate();
-
+  // [FIX] KHÔNG deferUpdate trước showModal
   const tempForm = await dbHelpers.getTempForm(interaction.user.id);
   const step = tempForm?.step ?? 0;
-  if (step < 2) return interaction.editReply({ content: `❌ Hoàn thành ${step === 0 ? 'Phần 1' : 'Phần 2'} trước.`, components: [], embeds: [] });
+
+  if (step < 2) {
+    return interaction.reply({ content: `❌ Hoàn thành ${step === 0 ? 'Phần 1' : 'Phần 2'} trước.`, flags: MessageFlags.Ephemeral });
+  }
 
   if (step >= 3) {
-    return interaction.editReply({
+    return interaction.reply({
       embeds: [new EmbedBuilder().setColor(0x57F287).setTitle('✅ Đã hoàn thành Phần 3').setDescription('Bạn đã điền xong cả 3 phần. Hồ sơ đang chờ admin duyệt.')],
       components: [],
+      flags: MessageFlags.Ephemeral,
     });
   }
+
+  // step === 2: OK, mở modal
   return openForm3(interaction);
 }
 
