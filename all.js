@@ -3,6 +3,7 @@ import { resolve } from 'path';
 
 const bots = [
   { name: 'dcbot', script: 'bots/dcbot/src/index.js' },
+  { name: 'noti-bot', script: 'bots/noti-bot/src/index.js' },
 ];
 
 console.log('=== Starting all bots ===');
