@@ -18,7 +18,6 @@ const JOB_ROLES = {
   'Photography': process.env.DCBOT_ROLE_PHOTOGRAPHY_ID || '1499842675996758264',
   'Editor':      process.env.DCBOT_ROLE_EDITOR_ID      || '1499842796792840263',
   'Network':     process.env.DCBOT_ROLE_NETWORK_ID     || '1503634110864953478',
-  'Other':       process.env.DCBOT_ROLE_OTHER_ID       || '1503634300585775176',
 };
 
 // ── Role IDs giới tính ────────────────────────────────────────────
@@ -325,7 +324,6 @@ export async function handleForm3Submit(interaction) {
   const roleRow2 = new ActionRowBuilder().addComponents(
     new ButtonBuilder().setCustomId('verify_role_Editor').setLabel('🎬 Editor').setStyle(ButtonStyle.Primary),
     new ButtonBuilder().setCustomId('verify_role_Network').setLabel('🌐 Network').setStyle(ButtonStyle.Primary),
-    new ButtonBuilder().setCustomId('verify_role_Other').setLabel('❓ Other').setStyle(ButtonStyle.Primary),
   );
 
   const embed = new EmbedBuilder()
@@ -357,7 +355,6 @@ async function _showJobRoleSelectionDeferred(interaction) {
   const roleRow2 = new ActionRowBuilder().addComponents(
     new ButtonBuilder().setCustomId('verify_role_Editor').setLabel('🎬 Editor').setStyle(ButtonStyle.Primary),
     new ButtonBuilder().setCustomId('verify_role_Network').setLabel('🌐 Network').setStyle(ButtonStyle.Primary),
-    new ButtonBuilder().setCustomId('verify_role_Other').setLabel('❓ Other').setStyle(ButtonStyle.Primary),
   );
   const embed = new EmbedBuilder()
     .setColor(0x5865F2)
@@ -405,7 +402,6 @@ async function showJobRoleSelection(interaction, isReply) {
   const roleRow2 = new ActionRowBuilder().addComponents(
     new ButtonBuilder().setCustomId('verify_role_Editor').setLabel('🎬 Editor').setStyle(ButtonStyle.Primary),
     new ButtonBuilder().setCustomId('verify_role_Network').setLabel('🌐 Network').setStyle(ButtonStyle.Primary),
-    new ButtonBuilder().setCustomId('verify_role_Other').setLabel('❓ Other').setStyle(ButtonStyle.Primary),
   );
 
   const embed = new EmbedBuilder()

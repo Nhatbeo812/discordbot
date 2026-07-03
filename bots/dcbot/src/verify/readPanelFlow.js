@@ -23,7 +23,6 @@ const JOB_ROLE_OPTIONS = [
   { label: 'Photography',  value: 'Photography',  emoji: '📷' },
   { label: 'Editor',       value: 'Editor',       emoji: '🎬' },
   { label: 'Network',      value: 'Network',      emoji: '🌐' },
-  { label: 'Other',        value: 'Other',        emoji: '❓' },
 ];
 
 const GENDER_OPTIONS = [

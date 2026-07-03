@@ -12,7 +12,7 @@ const client = new Client({
   ],
 });
 
-client.once('ready', async () => {
+client.once('clientReady', async () => {
   const guild = client.guilds.cache.get(config.guildId);
   if (!guild) {
     logger.error('Guild không tồn tại. Dừng bot.');

@@ -168,7 +168,7 @@ export const dbHelpers = {
       member_code:    memberCode,
       username:       profileData.username      ?? '',
       username_lower: (profileData.username     ?? '').toLowerCase(),
-      job_role:       profileData.manual_role    ?? 'Other',
+      job_role:       profileData.manual_role    ?? '',
       gender:         profileData.gender         ?? '',
       bio:            profileData.bio            ?? '',
       job_field:      profileData.job_field      ?? '',

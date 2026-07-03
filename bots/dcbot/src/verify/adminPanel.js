@@ -23,7 +23,6 @@ const JOB_ROLES = {
   'Photography': process.env.DCBOT_ROLE_PHOTOGRAPHY_ID || '1499842675996758264',
   'Editor':      process.env.DCBOT_ROLE_EDITOR_ID      || '1499842796792840263',
   'Network':     process.env.DCBOT_ROLE_NETWORK_ID     || '1503634110864953478',
-  'Other':       process.env.DCBOT_ROLE_OTHER_ID       || '1503634300585775176',
 };
 
 // ── Role IDs giới tính ────────────────────────────────────────────

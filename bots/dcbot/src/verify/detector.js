@@ -9,7 +9,6 @@ const ROLE_KEYWORDS = [
   { keywords: ['vfx', 'visual effect', 'hiệu ứng hình ảnh', 'compositing', 'nuke', 'after effects'], role: 'VFX' },
   { keywords: ['photo', 'photographer', 'nhiếp ảnh', 'lightroom', 'chụp ảnh', 'photography'], role: 'Photography' },
   { keywords: ['network', 'networking', 'quản trị mạng', 'cisco', 'ccna', 'ccnp', 'hạ tầng mạng', 'network engineer', 'mạng máy tính'], role: 'Network' },
-  { keywords: ['other', 'khác', 'khác đi', 'không có chuyên ngành', 'general', 'misc'], role: 'Other' },
 ];
 
 // ── Levenshtein similarity ────────────────────────────────────────

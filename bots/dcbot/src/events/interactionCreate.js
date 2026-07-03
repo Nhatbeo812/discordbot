@@ -40,7 +40,6 @@ const ROLE_BUTTON_MAP = {
   'verify_role_Photo': 'Photography',
   'verify_role_Editor': 'Editor',
   'verify_role_Network': 'Network',
-  'verify_role_Other': 'Other',
 };
 
 const GENDER_BUTTON_MAP = {
